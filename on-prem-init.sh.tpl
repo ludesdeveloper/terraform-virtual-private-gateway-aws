@@ -20,7 +20,6 @@ conn VpnConn1
  dpddelay=10
  dpdtimeout=30
  dpdaction=restart_by_peer
-
 EOF
 cat <<EOF > /etc/ipsec.d/connections.secrets
 ${customer_gateway_ip_address} ${vpn_tunnel_ip_address}: PSK "PRE_SHARED_KEY"
@@ -33,7 +32,7 @@ EOF
 cat <<EOF > ~/execute_ipsec.sh 
 systemctl restart network
 systemctl start ipsec
-systemctl status ipsecEOF
+systemctl status ipsec
 EOF
 chmod u+x ~/execute_ipsec.sh
 
