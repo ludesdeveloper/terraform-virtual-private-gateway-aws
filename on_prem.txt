@@ -1,0 +1,31 @@
+vim /etc/ipsec.d/connections.conf
+conn VpnConn1
+ authby=secret
+ auto=start
+ left=%defaultroute
+ leftid=cgw ip
+ right=vgw ip
+ type=tunnel
+ ikelifetime=8h
+ keylife=1h
+ phase2alg=aes128-sha1;modp1024
+ ike=aes128-sha1;modp1024
+ keyingtries=%forever
+ keyexchange=ike
+ leftsubnet=10.2.0.0/16
+ rightsubnet=10.1.0.0/16
+ dpddelay=10
+ dpdtimeout=30
+ dpdaction=restart_by_peer
+
+vim /etc/ipsec.d/connections.secrets
+cgw-ip vgw-ip: PSK "PRE_SHARED_KEY"
+
+vim /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.default.accept_source_route = 0
+
+systemctl restart network
+systemctl start ipsec
+systemctl status ipsec
