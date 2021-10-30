@@ -22,6 +22,14 @@ data "aws_ami" "amazon-linux-2" {
   }
 }
 
+data "template_file" "on_prem_init" {
+  template = file("on-prem-init.sh.tpl")
+
+  vars = {
+    some_address = "${aws_instance.some.private_ip}"
+  }
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-for-development"
   public_key = file(var.public_key_file)
@@ -52,6 +60,7 @@ resource "aws_instance" "on_prem_instance" {
   ami           = data.aws_ami.amazon-linux-2.id
   instance_type = "t2.micro"
   key_name      = aws_key_pair.deployer.key_name
+  user_data     = data.template_file.on_prem_init.rendered
   #source_dest_check = false
   #vpc_security_group_ids = [
   #  aws_security_group.allow_ssh.id,
