@@ -26,7 +26,7 @@ data "template_file" "on_prem_init" {
   template = file("on-prem-init.sh.tpl")
 
   vars = {
-    vpn_tunnel_ip_address = "${aws_vpn_connection.cloud_to_on_prem_vpn.tunnel.*.tunnel1_address}"
+    vpn_tunnel_ip_address = "${aws_vpn_connection.tunnel1_address}"
   }
 }
 
