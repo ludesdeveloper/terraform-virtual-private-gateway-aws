@@ -26,7 +26,7 @@ data "template_file" "on_prem_init" {
   template = file("on-prem-init.sh.tpl")
 
   vars = {
-    some_address = "${aws_instance.some.private_ip}"
+    some_address = "${aws_eip.on_prem_eip.public_ip}"
   }
 }
 
