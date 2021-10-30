@@ -26,7 +26,11 @@ data "template_file" "on_prem_init" {
   template = file("on-prem-init.sh.tpl")
 
   vars = {
-    vpn_tunnel_ip_address = "${aws_vpn_connection.cloud_to_on_prem_vpn.tunnel1_address}"
+    vpn_tunnel_ip_address       = "${aws_vpn_connection.cloud_to_on_prem_vpn.tunnel1_address}"
+    customer_gateway_ip_address = "${aws_eip.on_prem_eip.public_ip}"
+    on_prem_subnet              = aws_subnet.on_prem_subnet.cidr_block
+    cloud_subnet                = aws_subnet.cloud_subnet.cidr_block
+
   }
 }
 

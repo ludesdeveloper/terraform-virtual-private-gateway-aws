@@ -6,8 +6,8 @@ cat <<EOF > /etc/ipsec.d/connections.conf
    authby=secret
    auto=start
    left=%defaultroute
-   leftid=cgw ip
-   right=vgw ip
+   leftid=${customer_gateway_ip_address}
+   right=${vpn_tunnel_ip_address}
    type=tunnel
    ikelifetime=8h
    keylife=1h
@@ -15,8 +15,8 @@ cat <<EOF > /etc/ipsec.d/connections.conf
    ike=aes128-sha1;modp1024
    keyingtries=%forever
    keyexchange=ike
-   leftsubnet=172.16.10.0/16
-   rightsubnet=172.14.10.0/16
+   leftsubnet=${on_prem_subnet}
+   rightsubnet=${cloud_subnet}
    dpddelay=10
    dpdtimeout=30
    dpdaction=restart_by_peer
