@@ -81,6 +81,12 @@ resource "aws_vpn_connection_route" "on_prem_vpn_connection_route" {
   vpn_connection_id      = aws_vpn_connection.cloud_to_on_prem_vpn.id
 }
 
+resource "aws_vpn_gateway_route_propagation" "cloud_route_propagation" {
+  vpn_gateway_id = aws_vpn_gateway.cloud_vpn_gw.id
+  route_table_id = aws_route_table.cloud_route_table.id
+}
+
+#on prem section
 resource "aws_vpc" "on_prem_vpc" {
   cidr_block = "172.16.0.0/16"
 
@@ -108,7 +114,7 @@ resource "aws_network_interface" "on_prem_interface" {
     aws_security_group.on_prem_allow_ingress.id,
     aws_security_group.on_prem_allow_incoming_for_app.id
   ]
-
+  source_dest_check = false
   tags = {
     Name = "on-prem-vpc"
   }
