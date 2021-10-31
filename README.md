@@ -3,7 +3,7 @@ Basically i just convert this video [Video Source](https://www.youtube.com/watch
 
 ## **Requirements**
 
-1. AWS Cli installed and login to AWS account
+1. AWS CLI installed and login to AWS account
 2. Terraform installed
 
 ## **How ?**
