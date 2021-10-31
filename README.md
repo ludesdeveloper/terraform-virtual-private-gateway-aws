@@ -1,5 +1,5 @@
 # SITE TO SITE VPN AWS SIMULATION USING OPENSWAN 
-Basically i just convert this video [Video Source](https://www.youtube.com/watch?v=Ju4K3K873sw&list=WL&index=2&t=200s) to terraform code.
+Basically i just convert this video [Video Source](https://www.youtube.com/watch?v=Ju4K3K873sw&list=WL&index=2) to terraform code.
 
 ## **Requirements**
 
